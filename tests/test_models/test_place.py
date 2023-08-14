@@ -16,15 +16,19 @@ from time import sleep
 class TestPlace(unittest.TestCase):
     """Test Cases for the Place class."""
 
-    def test_IsInstanceOf(self):
-        """Test instance"""
+    def test_instance_and_inheritance(self):
+        """
+        Test the instance type and inheritance.
+        """
         place = Place()
         self.assertEqual(str(type(place)), "<class 'models.place.Place'>")
         self.assertIsInstance(place, Place)
         self.assertTrue(issubclass(type(place), BaseModel))
 
     def test_attributes_existence_and_type(self):
-        """Test attributes existence"""
+        """
+        Test attributes existence and type
+        """
         place = Place()
         self.assertTrue(hasattr(place, "city_id"))
         self.assertTrue(type(place.city_id) == str)
