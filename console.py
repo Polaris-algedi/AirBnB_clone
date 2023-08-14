@@ -158,6 +158,45 @@ class HBNBCommand(cmd.Cmd):
             setattr(objs[key], commands[2], commands[3])
             objs[key].save()
 
+    def count(self, cls_name):
+        """
+        Count the number of instances of a specified class.
+
+        Args:
+            cls_name (str): The name of the class.
+
+        This method counts the instances of the specified class
+        and prints the count.
+        """
+        objs = list(storage.all().values())
+        count = sum(1 for o in objs if type(o).__name__ == cls_name)
+        print(count)
+
+    def default(self, line):
+        """
+        Default method called for unrecognized commands.
+
+        Args:
+            line (str): The input command line.
+
+        This method checks for specific patterns of commands
+        and delegates to corresponding methods.
+
+        Available Patterns:
+            - "<class name>.all()":
+                Calls the "do_all()" method with the class name.
+            - "<class name>.count()":
+                Calls the "count()" method with the class name.
+        """
+        cmd = {
+            "all()": self.do_all,
+            "count()": self.count
+        }
+
+        commands = line.split(".")
+        if len(commands) > 1 and commands[1] in cmd:
+            cmd[commands[1]](commands[0])
+
     def do_EOF(self, line):
         """Handles the end-of-file condition,
         by exiting gracefully
