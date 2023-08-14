@@ -197,6 +197,10 @@ class HBNBCommand(cmd.Cmd):
         if len(commands) > 1 and commands[1] in cmd:
             cmd[commands[1]](commands[0])
 
+    def emptyline(self):
+        """Do nothing when an empty line is entered."""
+        pass
+
     def do_EOF(self, line):
         """Handles the end-of-file condition,
         by exiting gracefully
@@ -204,9 +208,18 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
+    def help_EOF(self):
+        """Display help information for the EOF command."""
+        print("This command allows you to exit the command", end=" ")
+        print("interpreter gracefully by pressing Ctrl+D (EOF).\n")
+
     def do_quit(self, line):
-        """Quit command to exit the program."""
+        """This command allows you to exit the command"""
         return True
+
+    def help_quit(self):
+        """Display help information for the quit command."""
+        print("Quit command to exit the program\n")
 
 
 if __name__ == '__main__':
