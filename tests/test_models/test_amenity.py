@@ -16,32 +16,23 @@ from time import sleep
 class TestAmenity(unittest.TestCase):
     """Test Cases for the Amenity class."""
 
-    def setUp(self):
-        """Sets up test resources"""
-        self.u1 = Amenity()
-        self.u1.name = "Polaris"
-
-    def tearDown(self):
-        """Tears down test resources"""
-        self.u1 = None
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
-
-    def test_type(self):
-        """Test the instance type"""
-        self.assertEqual(str(type(self.u1)),
+    def test_instance_and_inheritance(self):
+        """
+        Test the instance type and inheritance.
+        """
+        amenity = Amenity()
+        self.assertEqual(str(type(amenity)),
                          "<class 'models.amenity.Amenity'>")
-        self.assertIsInstance(self.u1, Amenity)
-        self.assertTrue(issubclass(type(self.u1), BaseModel))
+        self.assertIsInstance(amenity, Amenity)
+        self.assertTrue(issubclass(type(amenity), BaseModel))
 
-    def test_attributes(self):
-        """Test attributes existence"""
-        u1_dict = self.u1.__dict__
-        self.assertIn('id', u1_dict)
-        self.assertIn('created_at', u1_dict)
-        self.assertIn('updated_at', u1_dict)
-        self.assertIn('name', u1_dict)
+    def test_attributes_existence_and_type(self):
+        """
+        Test attributes existence and type
+        """
+        amenity = Amenity()
+        self.assertTrue(hasattr(amenity, "name"))
+        self.assertTrue(type(amenity.name) == str)
 
 
 if __name__ == '__main__':

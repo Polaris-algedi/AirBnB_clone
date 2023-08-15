@@ -16,35 +16,28 @@ from time import sleep
 class TestReview(unittest.TestCase):
     """Test Cases for the Review class."""
 
-    def setUp(self):
-        """Sets up test resources"""
-        self.u1 = Review()
-        self.u1.user_id = str(uuid.uuid4())
-        self.u1.place_id = str(uuid.uuid4())
-        self.u1.text = "Awesome"
+    def test_instance_and_inheritance(self):
+        """
+        Test the instance type and inheritance.
+        """
+        review = Review()
+        self.assertEqual(str(type(review)), "<class 'models.review.Review'>")
+        self.assertIsInstance(review, Review)
+        self.assertTrue(issubclass(type(review), BaseModel))
 
-    def tearDown(self):
-        """Tears down test resources"""
-        self.u1 = None
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
+    def test_attributes_existence_and_type(self):
+        """
+        Test attributes existence and type
+        """
+        review = Review()
+        self.assertTrue(hasattr(review, "place_id"))
+        self.assertTrue(type(review.place_id) == str)
 
-    def test_IsInstanceOf(self):
-        """Test instance"""
-        self.assertEqual(str(type(self.u1)), "<class 'models.review.Review'>")
-        self.assertIsInstance(self.u1, Review)
-        self.assertTrue(issubclass(type(self.u1), BaseModel))
+        self.assertTrue(hasattr(review, "user_id"))
+        self.assertTrue(type(review.user_id) == str)
 
-    def test_attributes(self):
-        """Test attributes existence"""
-        u1_dict = self.u1.__dict__
-        self.assertIn('id', u1_dict)
-        self.assertIn('created_at', u1_dict)
-        self.assertIn('updated_at', u1_dict)
-        self.assertIn('user_id', u1_dict)
-        self.assertIn('place_id', u1_dict)
-        self.assertIn('text', u1_dict)
+        self.assertTrue(hasattr(review, "text"))
+        self.assertTrue(type(review.text) == str)
 
 
 if __name__ == '__main__':

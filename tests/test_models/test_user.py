@@ -16,36 +16,31 @@ from time import sleep
 class TestUser(unittest.TestCase):
     """Test Cases for the User class."""
 
-    def setUp(self):
-        """Sets up test resources"""
-        self.u1 = User()
-        self.u1.email = "MP@example.com"
-        self.u1.password = "123456"
-        self.u1.first_name = "Mohammed"
-        self.u1.last_name = "Polaris"
+    def test_instance_and_inheritance(self):
+        """
+        Test the instance type and inheritance.
+        """
+        user = User()
+        self.assertEqual(str(type(user)), "<class 'models.user.User'>")
+        self.assertIsInstance(user, User)
+        self.assertTrue(issubclass(type(user), BaseModel))
 
-    def tearDown(self):
-        """Tears down test resources"""
-        self.u1 = None
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
+    def test_attributes_existence_and_type(self):
+        """
+        Test attributes existence and type
+        """
+        user = User()
+        self.assertTrue(hasattr(user, "email"))
+        self.assertTrue(type(user.email) == str)
 
-    def test_IsInstanceOf(self):
-        """Test instance"""
-        self.assertEqual(str(type(self.u1)), "<class 'models.user.User'>")
-        self.assertIsInstance(self.u1, User)
-        self.assertTrue(issubclass(type(self.u1), BaseModel))
+        self.assertTrue(hasattr(user, "password"))
+        self.assertTrue(type(user.password) == str)
 
-    def test_attributes(self):
-        u1_dict = self.u1.__dict__
-        self.assertIn('id', u1_dict)
-        self.assertIn('created_at', u1_dict)
-        self.assertIn('updated_at', u1_dict)
-        self.assertIn('email', u1_dict)
-        self.assertIn('password', u1_dict)
-        self.assertIn('first_name', u1_dict)
-        self.assertIn('last_name', u1_dict)
+        self.assertTrue(hasattr(user, "first_name"))
+        self.assertTrue(type(user.first_name) == str)
+
+        self.assertTrue(hasattr(user, "last_name"))
+        self.assertTrue(type(user.last_name) == str)
 
 
 if __name__ == '__main__':

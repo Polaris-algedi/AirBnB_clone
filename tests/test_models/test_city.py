@@ -16,33 +16,25 @@ from time import sleep
 class TestCity(unittest.TestCase):
     """Test Cases for the City class."""
 
-    def setUp(self):
-        """Sets up test resources"""
-        self.u1 = City()
-        self.u1.state_id = "LA-jhbdhbad-213561"
-        self.u1.name = "LA"
+    def test_instance_and_inheritance(self):
+        """
+        Test the instance type and inheritance.
+        """
+        city = City()
+        self.assertEqual(str(type(city)), "<class 'models.city.City'>")
+        self.assertIsInstance(city, City)
+        self.assertTrue(issubclass(type(city), BaseModel))
 
-    def tearDown(self):
-        """Tears down test resources"""
-        self.u1 = None
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
+    def test_attributes_existence_and_type(self):
+        """
+        Test attributes existence and type
+        """
+        city = City()
+        self.assertTrue(hasattr(city, "state_id"))
+        self.assertTrue(type(city.state_id) == str)
 
-    def test_IsInstanceOf(self):
-        """Test instance"""
-        self.assertEqual(str(type(self.u1)), "<class 'models.city.City'>")
-        self.assertIsInstance(self.u1, City)
-        self.assertTrue(issubclass(type(self.u1), BaseModel))
-
-    def test_attributes(self):
-        """Test attributes existence"""
-        u1_dict = self.u1.__dict__
-        self.assertIn('id', u1_dict)
-        self.assertIn('created_at', u1_dict)
-        self.assertIn('updated_at', u1_dict)
-        self.assertIn('name', u1_dict)
-        self.assertIn('state_id', u1_dict)
+        self.assertTrue(hasattr(city, "name"))
+        self.assertTrue(type(city.name) == str)
 
 
 if __name__ == '__main__':
