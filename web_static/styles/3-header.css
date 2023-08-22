@@ -1,0 +1,18 @@
+header {
+    position: relative;
+    background-color: #ffffff;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.logo-container {
+    width: 142px;
+    height: 60px;
+    background-image: url("../images/logo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50%;
+    transform: translate(20px, -50%);
+}
